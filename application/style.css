@@ -30,6 +30,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+h2 {
+    color: #eee;
+}
+
 #btn-iniciar {
     background-color: #006284;
     color: white;
