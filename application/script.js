@@ -1,12 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const paises = document.querySelectorAll('path');
-    console.log(paises);
+    const btnIniciar = document.getElementById("btn-iniciar");
+    const telaInicial = document.getElementById("tela-inicial");
+    const mapaContainer = document.getElementById("mapa-container");
+
+    btnIniciar.addEventListener("click", function () {
+        telaInicial.style.display = "none";
+        mapaContainer.style.display = "block";
+    });
+
+    const paises = document.querySelectorAll("#mapa path");
 
     paises.forEach((pais) => {
         pais.addEventListener("click", function () {
             const nome = pais.getAttribute("name");
-            const clazz = pais.getAttribute("class");
-            alert("Você clicou no país: " + nome || clazz);
+            alert("Você clicou no país: " + nome);
         });
     });
 });
