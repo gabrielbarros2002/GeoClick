@@ -13,13 +13,28 @@
         <button id="btn-iniciar">Iniciar</button>
     </div>
     
-    <!-- Contêiner do Objetivo -->
     <div id="objetivo-container" style="display: none;">
-        <h2 id="instrucoes">Clique no país correto!</h2>
+        <div id="vidas-container">
+            <div id="vidas">
+                <span class="vida" id="vida1">❤️</span>
+                <span class="vida" id="vida2">❤️</span>
+                <span class="vida" id="vida3">❤️</span>
+            </div>
+            <div id="contador-acertos">
+                <p>Acertos: <span id="acertos">0</span></p>
+            </div>
+        </div>
+        <h2 id="instrucoes">
+            <span class="icon">📍</span> Encontre: <span id="pais-alvo">French Polynesia</span>
+        </h2>
     </div>
 
     <!-- Mapa (inicialmente escondido) -->
     <div id="mapa-container" style="display: none;">
+        <div id="zoom-controls">
+            <button id="zoom-in">+</button>
+            <button id="zoom-out">-</button>
+        </div>
         <?xml version="1.0"?>
         <!--
             *************Map created by Simplemaps.com********************
