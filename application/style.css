@@ -2,9 +2,58 @@
     margin: 0;
     padding: 0;
 }
+
 body {
-    background-color: #01171b;
+    font-family: 'Roboto', sans-serif;
+    background-color: #01171b;  /* Cor de fundo do jogo */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    text-align: center;
 }
+
+/* Tela Inicial */
+#tela-inicial {
+    background: linear-gradient(135deg, #004466, #022c3a); /* Gradiente suave */
+    border-radius: 15px;
+    padding: 40px 20px;
+    width: 80%;
+    max-width: 400px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para profundidade */
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Título */
+#tela-inicial h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #ffcc00;  /* Cor dourada para o título */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra suave no título */
+}
+
+/* Estilizando o botão */
+#btn-iniciar {
+    background-color: #006284;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra no botão */
+}
+
+/* Hover no botão */
+#btn-iniciar:hover {
+    background-color: #0089a5;
+    transform: scale(1.1);  /* Aumento do botão ao passar o mouse */
+}
+
 svg path {
     fill: #00394f;
     stroke: #eee;
@@ -14,16 +63,6 @@ svg path:hover {
     fill: #006284;
     transition: 0.6s;
     cursor: pointer;
-}
-
-/* Estilizando a Tela Inicial */
-#tela-inicial {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #022c3a;
 }
 
 h1 {
@@ -47,4 +86,45 @@ h2 {
 
 #btn-iniciar:hover {
     background-color: #0089a5;
+}
+
+#objetivo-container {
+    text-align: center;
+    background-color: #004466;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 50%;
+    margin: 20px auto;
+    font-size: 24px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+#instrucoes {
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+/* Estilizando o contêiner do mapa */
+#mapa-container {
+    position: relative;
+    width: 100%;  /* Ocupa 100% da largura da tela */
+    height: 100vh;  /* Ocupa 100% da altura da tela */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;  /* Permite o scroll se necessário */
+}
+
+/* Ajustando o mapa SVG */
+#mapa {
+    width: 100%;
+    height: auto;  /* Mantém a proporção do mapa */
+    max-width: 100%;  /* Limita a largura máxima do mapa */
+    max-height: 100vh;  /* Limita a altura máxima do mapa */
+    display: block;
+    overflow: visible;  /* Garante que o conteúdo do SVG não seja cortado */
+    margin-bottom: 50px;
 }
