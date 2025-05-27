@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const btnIniciar = document.getElementById("btn-iniciar");
     const telaInicial = document.getElementById("tela-inicial");
     const mapaContainer = document.getElementById("mapa-container");
     const instrucoes = document.getElementById("instrucoes");
@@ -154,10 +153,16 @@ document.addEventListener("DOMContentLoaded", function () {
         mapa.style.transformOrigin = "50% 50%";
         mapa.style.transform = "scale(1)";
         mapa.style.cursor = "grab";
-    }    
+    }
 
-    btnIniciar.addEventListener("click", function () {
-        nivelSelecionado = parseInt(document.getElementById("nivel-select").value);
+    telaInicial.querySelectorAll('button').forEach((btn) => {
+        btn.addEventListener("click", () => {
+            iniciarJogo(btn.value);
+        })
+    });
+
+    function iniciarJogo(nivel) {
+        nivelSelecionado = nivel;
         telaInicial.style.display = "none";
         mapaContainer.style.display = "block";
         objetivoContainer.style.display = "block";
@@ -183,5 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
         escolherPaisAleatorio();
-    });      
+    }
+  
 });
