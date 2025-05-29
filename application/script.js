@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Filtra os países por nível e armazena em paisesRestantes
         const paisesFiltrados = Array.from(paises).filter(pais => {
-            return parseInt(pais.getAttribute("nivel")) <= nivelSelecionado;
+            return parseInt(pais.getAttribute("nivel")) == nivelSelecionado;
         });
         
         // Criar conjunto de nomes únicos
