@@ -34,16 +34,22 @@
         </h2>
     </div>
 
-    <div class="tela" id="tela-acerto" style="display: none;">
-        <h1>Parabéns!</h1>
-        <h2 id="mensagem-acerto"></h2>
+    <div class="tela" id="tela-feedback" style="display: none;">
+        <h1 id="titulo-feedback">Parabéns!</h1>
+        <h2 id="mensagem-feedback"></h2>
         <button id="btn-proximo">Próximo</button>
     </div>
 
     <div class="tela" id="tela-vitoria" style="display: none;">
         <h1>Parabéns!</h1>
-        <h2 id="mensagem-acerto">Você acertou todos os países deste nível!</h2>
-        <button id="btn-reiniciar">Jogar novamente</button>
+        <h2>Você acertou todos os países deste nível!</h2>
+        <button class="btn-reiniciar">Jogar novamente</button>
+    </div>
+
+    <div class="tela" id="tela-derrota" style="display: none;">
+        <h1>Game Over!</h1>
+        <h2>❌ Você perdeu todas as vidas.</h2>
+        <button class="btn-reiniciar">Jogar novamente</button>
     </div>
 
     <!-- Mapa (inicialmente escondido) -->

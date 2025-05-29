@@ -1,10 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const telaInicial = document.getElementById("tela-inicial");
-    const telaAcerto = document.getElementById("tela-acerto");
+    const telaFeedback = document.getElementById("tela-feedback");
     const telaVitoria = document.getElementById("tela-vitoria");
+    const telaDerrota = document.getElementById("tela-derrota");
     const proxBtn = document.getElementById("btn-proximo");
-    const restartBtn = document.getElementById("btn-reiniciar");
-    const msgAcerto = document.getElementById("mensagem-acerto");
+    const tituloFeedback = document.getElementById("titulo-feedback");
+    const msgFeedback = document.getElementById("mensagem-feedback");
     const mapaContainer = document.getElementById("mapa-container");
     const instrucoes = document.getElementById("instrucoes");
     const objetivoContainer = document.getElementById("objetivo-container");
@@ -96,21 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function escolherPaisAleatorio() {
         if (paisesRestantes.length === 0) {
-            mapaContainer.style.display = "none";
-            objetivoContainer.style.display = "none";
-            telaVitoria.style.display = "block";
-            confettiLegal();
+            mostrarTelaVitoria();
             return;
-        }
-        if (acertos > 0) {
-            mapaContainer.style.display = "none";
-            objetivoContainer.style.display = "none";
-            telaAcerto.style.display = "block";
-            msgAcerto.textContent = '✅ Você encontrou ' + nomePaisAtual;
-
-            document.querySelectorAll(`path[name="${nomePaisAtual}"]`).forEach((pais) => {
-                pais.style.fill = '#2f6e32';
-            });
         }
         nomePaisAtual = paisesRestantes.pop();
         instrucoes.textContent = `Encontre: ${nomePaisAtual}`;
@@ -138,27 +126,65 @@ document.addEventListener("DOMContentLoaded", function () {
         if (nomeClicado === nomePaisAtual) {
             acertos++;
             acertosDisplay.textContent = acertos;
+            preencherPaisAcerto(nomeClicado);
+            mostrarMsgAcerto();
             escolherPaisAleatorio();
         } else {
             vidas--;
             atualizarVidas();
             if (vidas <= 0) {
-                alert("❌ Você perdeu todas as vidas. O jogo será reiniciado.");
-                reiniciarJogo();
+                mostrarTelaDerrota();
             } else {
-                alert(`❌ Errado! Você clicou em ${nomeClicado}. Tente novamente.`);
+                mostrarMsgErro(nomeClicado);
             }
         }
     }
 
-    restartBtn.addEventListener("click", () => {
-        reiniciarJogo();
+    function preencherPaisAcerto(nomePais) {
+        document.querySelectorAll(`path[name="${nomePais}"]`).forEach((pais) => {
+            pais.style.fill = '#2f6e32';
+        });
+    }
+
+    function mostrarMsgAcerto() {
+        esconderMapaEObjetivo();
+        telaFeedback.style.display = "block";
+        tituloFeedback.textContent = "Parabéns!";
+        msgFeedback.textContent = '✅ Você encontrou ' + nomePaisAtual;
+    }
+
+    function mostrarMsgErro(nomeClicado) {
+        esconderMapaEObjetivo();
+        telaFeedback.style.display = "block";
+        tituloFeedback.textContent = "Errado!";
+        msgFeedback.textContent = `❌ Você clicou em ${nomeClicado}. Tente novamente.`;
+    }
+
+    function mostrarTelaVitoria() {
+        telaVitoria.style.display = "block";
+        confettiLegal();
+    }
+
+    function mostrarTelaDerrota() {
+        esconderMapaEObjetivo();
+        telaDerrota.style.display = "block";
+    }
+
+    document.querySelectorAll(".btn-reiniciar").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            reiniciarJogo();
+        });
     });
+
+    function esconderMapaEObjetivo() {
+        mapaContainer.style.display = "none";
+        objetivoContainer.style.display = "none";
+    }
 
     proxBtn.addEventListener("click", () => {
         mapaContainer.style.display = "block";
         objetivoContainer.style.display = "block";
-        telaAcerto.style.display = "none";
+        telaFeedback.style.display = "none";
     })
 
     // Função para reiniciar o jogo
@@ -169,10 +195,10 @@ document.addEventListener("DOMContentLoaded", function () {
         acertosDisplay.textContent = acertos;
         telaInicial.style.display = "block";
         telaVitoria.style.display = "none";
+        telaDerrota.style.display = "none";
         mapaContainer.style.display = "none";
         objetivoContainer.style.display = "none";
         vidasContainer.style.display = "none";
-        instrucoes.textContent = "Clique em Iniciar para jogar!";
         scale = 1;
         offsetX = 0;
         offsetY = 0;
