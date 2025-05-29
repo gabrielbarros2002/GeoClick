@@ -1,5 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     const telaInicial = document.getElementById("tela-inicial");
+    const telaAcerto = document.getElementById("tela-acerto");
+    const telaVitoria = document.getElementById("tela-vitoria");
+    const proxBtn = document.getElementById("btn-proximo");
+    const restartBtn = document.getElementById("btn-reiniciar");
+    const msgAcerto = document.getElementById("mensagem-acerto");
     const mapaContainer = document.getElementById("mapa-container");
     const instrucoes = document.getElementById("instrucoes");
     const objetivoContainer = document.getElementById("objetivo-container");
@@ -91,11 +96,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function escolherPaisAleatorio() {
         if (paisesRestantes.length === 0) {
-            alert("Parabéns! Você acertou todos os países deste nível!");
-            reiniciarJogo();
+            mapaContainer.style.display = "none";
+            objetivoContainer.style.display = "none";
+            telaVitoria.style.display = "block";
+            confettiLegal();
             return;
         }
-    
+        if (acertos > 0) {
+            mapaContainer.style.display = "none";
+            objetivoContainer.style.display = "none";
+            telaAcerto.style.display = "block";
+            msgAcerto.textContent = '✅ Você encontrou ' + nomePaisAtual;
+
+            document.querySelectorAll(`path[name="${nomePaisAtual}"]`).forEach((pais) => {
+                pais.style.fill = '#2f6e32';
+            });
+        }
         nomePaisAtual = paisesRestantes.pop();
         instrucoes.textContent = `Encontre: ${nomePaisAtual}`;
     }
@@ -122,7 +138,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (nomeClicado === nomePaisAtual) {
             acertos++;
             acertosDisplay.textContent = acertos;
-            alert("✅ Você acertou! Próximo país...");
             escolherPaisAleatorio();
         } else {
             vidas--;
@@ -136,6 +151,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    restartBtn.addEventListener("click", () => {
+        reiniciarJogo();
+    });
+
+    proxBtn.addEventListener("click", () => {
+        mapaContainer.style.display = "block";
+        objetivoContainer.style.display = "block";
+        telaAcerto.style.display = "none";
+    })
+
     // Função para reiniciar o jogo
     function reiniciarJogo() {
         vidas = 3;
@@ -143,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
         acertos = 0;
         acertosDisplay.textContent = acertos;
         telaInicial.style.display = "block";
+        telaVitoria.style.display = "none";
         mapaContainer.style.display = "none";
         objetivoContainer.style.display = "none";
         vidasContainer.style.display = "none";
@@ -153,6 +179,9 @@ document.addEventListener("DOMContentLoaded", function () {
         mapa.style.transformOrigin = "50% 50%";
         mapa.style.transform = "scale(1)";
         mapa.style.cursor = "grab";
+        document.querySelectorAll('path').forEach((pais) => {
+            pais.style.fill = '#00394f';
+        });
     }
 
     telaInicial.querySelectorAll('button').forEach((btn) => {
@@ -188,6 +217,35 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
         escolherPaisAleatorio();
+    }
+
+    function confettiLegal() {
+        const duration = 2 * 1000,
+        animationEnd = Date.now() + duration,
+        defaults = { startVelocity: 10, spread: 360, ticks: 60, zIndex: 0 };
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+        const interval = setInterval(function() {
+            const timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+            const particleCount = 50 * (timeLeft / duration);
+
+            confetti(
+                Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+                })
+            );
+            confetti(
+                Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+                })
+            );
+        }, 250);
     }
   
 });

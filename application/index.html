@@ -10,7 +10,7 @@
 
 <body>
     <!-- Tela Inicial -->
-    <div id="tela-inicial">
+    <div class="tela" id="tela-inicial">
         <h1>Bem vindo ao GeoClick!</h1>
         <h2>Selecione uma dificuldade!</h2>
         <button id="btn-facil" value="1">Fácil</button>
@@ -32,6 +32,18 @@
         <h2 id="instrucoes">
             <span class="icon">📍</span> Encontre: <span id="pais-alvo">French Polynesia</span>
         </h2>
+    </div>
+
+    <div class="tela" id="tela-acerto" style="display: none;">
+        <h1>Parabéns!</h1>
+        <h2 id="mensagem-acerto"></h2>
+        <button id="btn-proximo">Próximo</button>
+    </div>
+
+    <div class="tela" id="tela-vitoria" style="display: none;">
+        <h1>Parabéns!</h1>
+        <h2 id="mensagem-acerto">Você acertou todos os países deste nível!</h2>
+        <button id="btn-reiniciar">Jogar novamente</button>
     </div>
 
     <!-- Mapa (inicialmente escondido) -->
@@ -1854,7 +1866,7 @@
             </circle>
         </svg>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 

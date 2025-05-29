@@ -15,8 +15,7 @@ body {
     text-align: center;
 }
 
-/* Tela Inicial */
-#tela-inicial {
+.tela {
     background: linear-gradient(135deg, #004466, #022c3a); /* Gradiente suave */
     border-radius: 15px;
     padding: 40px 20px;
@@ -27,15 +26,14 @@ body {
     transition: transform 0.3s ease-in-out;
 }
 
-/* Título */
-#tela-inicial h1 {
+.tela h1 {
     font-size: 36px;
     margin-bottom: 20px;
     color: #ffcc00;  /* Cor dourada para o título */
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra suave no título */
 }
 
-#tela-inicial button{
+.tela button{
     background-color: #006284;
     color: white;
     border: none;
@@ -47,7 +45,7 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
-#tela-inicial button:hover {
+.tela button:hover {
     background-color: #0089a5;
     transform: scale(1.1);  
 }
