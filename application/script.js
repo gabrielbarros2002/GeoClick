@@ -96,10 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function escolherPaisAleatorio() {
-        if (paisesRestantes.length === 0) {
-            mostrarTelaVitoria();
-            return;
-        }
         nomePaisAtual = paisesRestantes.pop();
         instrucoes.textContent = `Encontre: ${nomePaisAtual}`;
     }
@@ -126,6 +122,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (nomeClicado === nomePaisAtual) {
             acertos++;
             acertosDisplay.textContent = acertos;
+            if (paisesRestantes.length === 0) {
+                mostrarTelaVitoria();
+                return;
+            }
             preencherPaisAcerto(nomeClicado);
             mostrarMsgAcerto();
             escolherPaisAleatorio();
@@ -161,6 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function mostrarTelaVitoria() {
+        esconderMapaEObjetivo();
         telaVitoria.style.display = "block";
         confettiLegal();
     }
@@ -196,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
         telaInicial.style.display = "block";
         telaVitoria.style.display = "none";
         telaDerrota.style.display = "none";
+        telaFeedback.style.display = "none";
         mapaContainer.style.display = "none";
         objetivoContainer.style.display = "none";
         vidasContainer.style.display = "none";
