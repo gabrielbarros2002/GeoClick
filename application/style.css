@@ -61,6 +61,10 @@ svg path:hover {
     cursor: pointer;
 }
 
+.preenchido {
+    fill: #2f6e32;
+}
+
 h1 {
     margin-bottom: 20px;
 }

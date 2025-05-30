@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let nomePaisAtual = null;
     let vidas = 3;
     let acertos = 0;
+    let totalPaises = 0;
     let scale = 1;
     let nivelSelecionado = 1;
     let paisesRestantes = [];
@@ -121,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (nomeClicado === nomePaisAtual) {
             acertos++;
-            acertosDisplay.textContent = acertos;
+            atualizarDisplayAcertos();
             if (paisesRestantes.length === 0) {
                 mostrarTelaVitoria();
                 return;
@@ -142,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function preencherPaisAcerto(nomePais) {
         document.querySelectorAll(`path[name="${nomePais}"]`).forEach((pais) => {
-            pais.style.fill = '#2f6e32';
+            pais.classList.add('preenchido');
         });
     }
 
@@ -188,6 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
         telaFeedback.style.display = "none";
     })
 
+    function atualizarDisplayAcertos() {
+        acertosDisplay.textContent = `${acertos}/${totalPaises}`;
+    }
+
     // Função para reiniciar o jogo
     function reiniciarJogo() {
         vidas = 3;
@@ -208,7 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mapa.style.transform = "scale(1)";
         mapa.style.cursor = "grab";
         document.querySelectorAll('path').forEach((pais) => {
-            pais.style.fill = '#00394f';
+            pais.classList.remove('preenchido');
         });
     }
 
@@ -237,6 +242,9 @@ document.addEventListener("DOMContentLoaded", function () {
     
         // Embaralha os países
         embaralharArray(paisesRestantes);
+
+        totalPaises = paisesRestantes.length;
+        atualizarDisplayAcertos();
     
         // Adiciona o evento de clique apenas uma vez
         paises.forEach((pais) => {
