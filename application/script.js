@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let paisesRestantes = [];
 
     const zoomMinimo = 0.5; // Zoom mínimo permitido (50%)
-    const zoomMaximo = 3; // Zoom máximo permitido (300%)
+    const zoomMaximo = 5; // Zoom máximo permitido (300%)
     const zoomStep = 0.1; // Passo de zoom (10%)
 
     let isDragging = false; // Indica se o mapa está sendo arrastado
