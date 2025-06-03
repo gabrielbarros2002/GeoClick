@@ -97,6 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function escolherPaisAleatorio() {
+        if (paisesRestantes.length === 0) {
+            mostrarTelaVitoria();
+            return;
+        }
         nomePaisAtual = paisesRestantes.pop();
         instrucoes.textContent = `Encontre: ${nomePaisAtual}`;
     }
@@ -123,10 +127,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (nomeClicado === nomePaisAtual) {
             acertos++;
             atualizarDisplayAcertos();
-            if (paisesRestantes.length === 0) {
-                mostrarTelaVitoria();
-                return;
-            }
             preencherPaisAcerto(nomeClicado);
             mostrarMsgAcerto();
             escolherPaisAleatorio();
