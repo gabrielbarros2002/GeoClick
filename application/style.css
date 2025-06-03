@@ -106,11 +106,6 @@ h2 {
     font-size: 36px;
 }
 
-#pais-alvo {
-    color: #00ff00;
-    font-weight: bold;
-}
-
 #vidas-container {
     display: flex;
     justify-content: space-between;
