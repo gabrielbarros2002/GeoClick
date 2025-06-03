@@ -97,10 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     function escolherPaisAleatorio() {
-        if (paisesRestantes.length === 0) {
-            mostrarTelaVitoria();
-            return;
-        }
         nomePaisAtual = paisesRestantes.pop();
         instrucoes.textContent = `Encontre: ${nomePaisAtual}`;
     }
@@ -128,6 +124,10 @@ document.addEventListener("DOMContentLoaded", function () {
             acertos++;
             atualizarDisplayAcertos();
             preencherPaisAcerto(nomeClicado);
+            if (paisesRestantes.length === 0) {
+                mostrarTelaVitoria();
+                return;
+            }
             mostrarMsgAcerto();
             escolherPaisAleatorio();
         } else {
