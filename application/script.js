@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     let paises = document.querySelectorAll("#mapa path");
     let nomePaisAtual = null;
-    let vidas = 3;
+    let vidas = 4;
     let acertos = 0;
     let totalPaises = 0;
     let scale = 1;
@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Atualiza as vidas no display
     function atualizarVidas() {
-        for (let i = 1; i <= 3; i++) {
+        for (let i = 1; i <= 4; i++) {
             const vida = document.getElementById(`vida${i}`);
             vida.style.visibility = i <= vidas ? "visible" : "hidden";
         }
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 mostrarTelaVitoria();
                 return;
             }
-            mostrarMsgAcerto();
+            event.target.classList.remove('comhover');
             escolherPaisAleatorio();
         } else {
             vidas--;
@@ -136,7 +136,18 @@ document.addEventListener("DOMContentLoaded", function () {
             if (vidas <= 0) {
                 mostrarTelaDerrota();
             } else {
-                mostrarMsgErro(nomeClicado);
+                showPopup(`Você clicou em ${nomeClicado}  -1❤️`)
+                event.target.classList.add('vermelho');
+                event.target.classList.remove('comhover');
+                event.target.setAttribute("anim", "shake");
+                setTimeout(() => {
+                    event.target.classList.remove('vermelho');
+                    event.target.removeAttribute("anim");
+                    event.target.classList.add('comhover');
+                }, 600)
+                setTimeout(() => {
+                    hidePopup();
+                }, 3500)
             }
         }
     }
@@ -195,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Função para reiniciar o jogo
     function reiniciarJogo() {
-        vidas = 3;
+        vidas = 4;
         atualizarVidas();
         acertos = 0;
         acertosDisplay.textContent = acertos;
@@ -235,10 +246,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const paisesFiltrados = Array.from(paises).filter(pais => {
             return parseInt(pais.getAttribute("nivel")) == nivelSelecionado;
         });
-        
+
         // Criar conjunto de nomes únicos
         const nomesUnicos = [...new Set(paisesFiltrados.map(p => p.getAttribute("name")))];
-        paisesRestantes = nomesUnicos;        
+        paisesRestantes = nomesUnicos.slice(0, 15);        
     
         // Embaralha os países
         embaralharArray(paisesRestantes);
@@ -250,10 +261,27 @@ document.addEventListener("DOMContentLoaded", function () {
         paises.forEach((pais) => {
             pais.removeEventListener("click", verificarClique);
             pais.addEventListener("click", verificarClique);
+            pais.classList.add('comhover');
         });
     
         escolherPaisAleatorio();
     }
+
+    function showPopup(message) {
+        const popupContainer = document.getElementById('popup-container');
+        const messageText = document.getElementById('message-text');
+        messageText.textContent = message;
+        popupContainer.style.display = 'block';
+    }
+      
+    function hidePopup() {
+        const popupContainer = document.getElementById('popup-container');
+        popupContainer.style.display = 'none';
+    }
+      
+    const closeButton = document.getElementById('close-button');
+    closeButton.addEventListener('click', hidePopup);
+      
 
     function confettiLegal() {
         const duration = 2 * 1000,
